@@ -1,0 +1,33 @@
+name: Rebuild Autonomous News Portal
+
+on:
+  schedule:
+    - cron: '0 */3 * * *'  # Runs every 3 hours
+  workflow_dispatch:      # Allows manual trigger from GitHub UI
+
+permissions:
+  contents: write         # Grants write permissions to commit index.html back to the repository
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Rebuild News Portal
+        run: python generate_news.py
+
+      - name: Commit and Push Updated index.html
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          # Only commit and push if index.html actually changed to avoid empty commit errors
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update news portal index.html [skip ci]" && git push origin main)
