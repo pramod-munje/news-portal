@@ -18,27 +18,41 @@ OUTPUT_HTML_PATH = os.path.join(WORKSPACE_DIR, "index.html")
 import urllib.parse
 import hashlib
 
-# Curated dynamic mapping to Lorem Flickr for virtually unlimited unique category photos
+# Use locally generated SVG gradients for fallback images to prevent adblockers from blocking them and ensure they load instantly
 def get_fallback_image(title, category):
-    """Deterministically maps a title and category to a unique, dynamic Lorem Flickr image fallback."""
-    category_tags = {
-        "ai-news": "artificial,intelligence",
-        "cybersecurity": "hacker,security",
-        "space": "galaxy,space",
-        "robotics": "robot,android",
-        "startups": "startup,office",
-        "technology": "technology,gadget",
-        "business": "business,finance",
-        "science": "science,laboratory",
-        "world": "city,travel",
-        "latest-news": "news,journalism"
+    """Generates a premium, modern inline SVG gradient fallback image for the category."""
+    category_colors = {
+        "ai-news": ("#1e1b4b", "#065f46"),
+        "cybersecurity": ("#0f172a", "#831843"),
+        "space": ("#000000", "#1e1b4b"),
+        "robotics": ("#171717", "#0f766e"),
+        "startups": ("#422006", "#86198f"),
+        "technology": ("#020617", "#1d4ed8"),
+        "business": ("#064e3b", "#0f172a"),
+        "science": ("#2e1065", "#0f172a"),
+        "world": ("#000000", "#000000"),
+        "latest-news": ("#171717", "#171717")
     }
-    tag = category_tags.get(category, "news")
-    # Generate a deterministic integer lock index based on title hash
-    h_idx = int(hashlib.md5(title.encode('utf-8')).hexdigest(), 16)
-    lock_val = h_idx % 100000
+    c1, c2 = category_colors.get(category, ("#0f172a", "#1e1b4b"))
+    label = category.replace('-', ' ').title()
     
-    return f"https://loremflickr.com/800/450/{tag}?lock={lock_val}"
+    # We construct the SVG with plain # for colors, and url() references
+    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+<defs>
+<linearGradient id="grad-{category}" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="{c1}" />
+<stop offset="100%" stop-color="{c2}" />
+</linearGradient>
+</defs>
+<rect width="800" height="450" fill="url(#grad-{category})" />
+<text x="400" y="225" font-family="system-ui, sans-serif" font-size="48" font-weight="bold" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" opacity="0.8">
+{label}
+</text>
+</svg>'''
+    # urllib.parse.quote will properly encode `#` as `%23`, `<` as `%3C`, etc.
+    # We do NOT use quote on a string that already has %23 in it, to avoid double-encoding to %2523.
+    encoded = urllib.parse.quote(svg)
+    return f"data:image/svg+xml;charset=utf-8,{encoded}"
 
 # Feeds Configuration
 FEEDS = [

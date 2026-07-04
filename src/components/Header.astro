@@ -1,0 +1,28 @@
+---
+// src/components/Header.astro
+---
+<header class="sticky top-0 z-50 bg-white border-b border-gray-200 h-16 flex items-center justify-between px-6">
+  <div class="flex items-center gap-6">
+    <a href="/" class="flex items-center gap-2 text-ink no-underline focus-visible:ring-2 focus-visible:ring-black outline-none rounded-sm">
+      <svg height="26" viewBox="0 0 75 65" fill="#171717"><path d="M37.59.25l36.95 64H.64l36.95-64z"></path></svg>
+      <span class="font-sans font-semibold text-lg tracking-tight">Chronicle</span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-1" aria-label="Main navigation">
+      <a href="#ai" class="text-sm text-body hover:bg-gray-100 px-3 py-1.5 rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-black outline-none">AI News</a>
+      <a href="#tech" class="text-sm text-body hover:bg-gray-100 px-3 py-1.5 rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-black outline-none">Tech</a>
+      <a href="#space" class="text-sm text-body hover:bg-gray-100 px-3 py-1.5 rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-black outline-none">Space</a>
+    </nav>
+  </div>
+
+  <div class="flex items-center gap-3">
+    <button aria-label="Search articles" class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 text-ink hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-black outline-none">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    </button>
+    
+    <div class="hidden sm:flex items-center gap-2">
+      <a href="#" class="text-sm font-medium px-3 h-7 flex items-center rounded bg-white text-ink border border-gray-200 hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-black outline-none">Log In</a>
+      <a href="#" class="text-sm font-medium px-3 h-7 flex items-center rounded bg-[#171717] text-white hover:bg-black focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 outline-none">Sign Up</a>
+    </div>
+  </div>
+</header>

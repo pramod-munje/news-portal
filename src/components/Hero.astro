@@ -1,0 +1,33 @@
+---
+// src/components/Hero.astro
+---
+<section class="relative w-full py-32 px-6 overflow-hidden flex flex-col items-center text-center bg-[#fafafa]">
+  <!-- Vercel-style Mesh Gradient Backdrop -->
+  <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden flex justify-center">
+    <div class="w-[800px] h-[400px] max-w-full opacity-40 blur-[80px]" style="background: radial-gradient(circle at 30% 30%, #50e3c2 0%, transparent 40%), radial-gradient(circle at 70% 30%, #007cf0 0%, transparent 40%), radial-gradient(circle at 50% 70%, #ff0080 0%, transparent 40%), radial-gradient(circle at 80% 80%, #f9cb28 0%, transparent 40%); transform: translate3d(0,0,0);"></div>
+  </div>
+
+  <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
+    <div class="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f5f5f5] text-xs font-mono text-body border border-gray-200">
+      <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+      Chronicle Engine v2.0
+    </div>
+    
+    <h1 class="text-5xl md:text-6xl font-semibold tracking-[-2.4px] text-ink mb-6 text-balance leading-tight">
+      Build and deploy on the AI news cloud.
+    </h1>
+    
+    <p class="text-lg text-body max-w-2xl mb-10 text-balance">
+      Autonomous real-time news aggregation from verified sources. Filter the noise, read the signal, and stay updated automatically.
+    </p>
+    
+    <div class="flex flex-wrap items-center justify-center gap-4">
+      <a href="#latest" class="h-12 px-6 rounded-full bg-[#171717] text-white font-medium flex items-center hover:bg-black transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 outline-none text-base">
+        Start Reading
+      </a>
+      <a href="#about" class="h-12 px-6 rounded-full bg-white text-ink font-medium flex items-center border border-gray-200 hover:bg-gray-50 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 outline-none text-base">
+        Learn More
+      </a>
+    </div>
+  </div>
+</section>

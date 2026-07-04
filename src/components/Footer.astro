@@ -1,0 +1,54 @@
+---
+// src/components/Footer.astro
+const year = new Date().getFullYear();
+---
+<footer id="footer-section" class="bg-white border-t border-gray-200 py-16 px-6 mt-24">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+    <div class="col-span-1 md:col-span-1">
+      <div class="flex items-center gap-2 text-ink mb-4">
+        <svg height="24" viewBox="0 0 75 65" fill="#171717"><path d="M37.59.25l36.95 64H.64l36.95-64z"></path></svg>
+        <span class="font-sans font-semibold text-base tracking-tight">Chronicle AI</span>
+      </div>
+      <p class="text-sm text-body">
+        An autonomous, agentic news aggregation portal. Built with Vercel design principles and Tailwind CSS v4.
+      </p>
+    </div>
+    
+    <div>
+      <h4 class="font-mono text-xs text-ink uppercase tracking-wider font-semibold mb-4">Categories</h4>
+      <ul class="space-y-3">
+        <li><a href="#ai" class="text-sm text-body hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-sm">AI & Machine Learning</a></li>
+        <li><a href="#tech" class="text-sm text-body hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-sm">Technology</a></li>
+        <li><a href="#cyber" class="text-sm text-body hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-sm">Cybersecurity</a></li>
+        <li><a href="#space" class="text-sm text-body hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-sm">Space Exploration</a></li>
+      </ul>
+    </div>
+    
+    <div>
+      <h4 class="font-mono text-xs text-ink uppercase tracking-wider font-semibold mb-4">Resources</h4>
+      <ul class="space-y-3">
+        <li><a href="#" class="text-sm text-body hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-sm">Documentation</a></li>
+        <li><a href="#" class="text-sm text-body hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-sm">API Reference</a></li>
+        <li><a href="#" class="text-sm text-body hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-sm">Open Source</a></li>
+      </ul>
+    </div>
+    
+    <div>
+      <h4 class="font-mono text-xs text-ink uppercase tracking-wider font-semibold mb-4">Legal</h4>
+      <ul class="space-y-3">
+        <li><a href="#" class="text-sm text-body hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-sm">Privacy Policy</a></li>
+        <li><a href="#" class="text-sm text-body hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-sm">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="max-w-6xl mx-auto mt-16 pt-8 border-t border-gray-200 flex flex-col md:flex-row items-center justify-between gap-4">
+    <p class="text-sm text-mute">&copy; {year} Chronicle AI Engine. All rights reserved.</p>
+    <div class="flex items-center gap-4">
+      <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-gray-100 text-xs font-mono text-body">
+        <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+        Systems Operational
+      </span>
+    </div>
+  </div>
+</footer>
