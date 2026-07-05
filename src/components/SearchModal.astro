@@ -1,0 +1,143 @@
+---
+---
+<dialog id="search-modal" class="backdrop:bg-black/50 backdrop:backdrop-blur-sm w-full max-w-2xl rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-canvas shadow-2xl p-0 overflow-hidden m-auto top-[10vh] fixed inset-x-0 open:animate-in open:fade-in open:zoom-in-95 focus:outline-none">
+  <div class="flex flex-col h-[60vh] max-h-[600px]">
+    <div class="flex items-center px-4 border-b border-gray-200 dark:border-gray-800">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-400"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" id="search-input" placeholder="Search news, topics, or categories..." class="w-full bg-transparent border-none focus:ring-0 px-4 py-4 text-lg text-ink placeholder:text-gray-400 outline-none h-14" autocomplete="off" />
+      <button id="close-search" class="p-2 text-gray-400 hover:text-ink transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 focus-visible:ring-2 focus-visible:ring-black outline-none">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    
+    <div id="search-results" class="flex-1 overflow-y-auto p-2">
+      <!-- Results populated here by JS -->
+      <div class="flex flex-col items-center justify-center h-full text-gray-400 space-y-2" id="search-loading" style="display: none;">
+        <svg class="animate-spin h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+        <p>Loading index...</p>
+      </div>
+      <div class="flex items-center justify-center h-full text-gray-400" id="search-empty">
+        <p>Start typing to search...</p>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  let searchIndex: any = null;
+  const modal = document.getElementById('search-modal') as HTMLDialogElement;
+  const toggleBtn = document.getElementById('search-toggle');
+  const closeBtn = document.getElementById('close-search');
+  const input = document.getElementById('search-input') as HTMLInputElement;
+  const resultsContainer = document.getElementById('search-results');
+  const emptyState = document.getElementById('search-empty');
+  const loadingState = document.getElementById('search-loading');
+
+  // Open modal
+  if (toggleBtn && modal) {
+    toggleBtn.addEventListener('click', async () => {
+      modal.showModal();
+      document.body.style.overflow = 'hidden';
+      if(input) input.focus();
+      
+      // Fetch index on first open
+      if (!searchIndex && emptyState && loadingState) {
+        emptyState.style.display = 'none';
+        loadingState.style.display = 'flex';
+        try {
+          const res = await fetch('/search.json');
+          searchIndex = await res.json();
+          loadingState.style.display = 'none';
+          if (input && input.value) performSearch(input.value);
+          else emptyState.style.display = 'flex';
+        } catch (e) {
+          console.error("Failed to load search index", e);
+          loadingState.style.display = 'none';
+          if (resultsContainer) resultsContainer.innerHTML = '<div class="p-6 text-center text-red-500">Failed to load search index. Please try again later.</div>';
+        }
+      }
+    });
+  }
+
+  // Close modal
+  const closeModal = () => {
+    if(modal) {
+      modal.close();
+      document.body.style.overflow = '';
+    }
+  };
+  
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  
+  // Close on backdrop click
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      const rect = modal.getBoundingClientRect();
+      const isInDialog = rect.top <= e.clientY && e.clientY <= rect.top + rect.height && rect.left <= e.clientX && e.clientX <= rect.left + rect.width;
+      if (!isInDialog) closeModal();
+    });
+  }
+  
+  // Search logic
+  const renderResult = (article: any) => {
+    const date = new Date(article.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    return `
+      <a href="${article.link}" target="_blank" rel="noopener noreferrer" class="flex gap-4 p-3 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors group">
+        ${article.image ? `<img src="${article.image}" alt="" class="w-16 h-16 object-cover rounded-md flex-shrink-0 bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-800" />` : `<div class="w-16 h-16 flex items-center justify-center bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-md flex-shrink-0 text-gray-400"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>`}
+        <div class="flex flex-col justify-center min-w-0">
+          <h4 class="text-ink font-medium truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">${article.title}</h4>
+          <div class="flex items-center gap-2 text-xs text-mute mt-1">
+            <span class="bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded font-medium">${article.category}</span>
+            <span>•</span>
+            <span>${date}</span>
+          </div>
+        </div>
+      </a>
+    `;
+  };
+
+  const performSearch = (query: string) => {
+    if (!searchIndex || !resultsContainer || !emptyState) return;
+    
+    // Clear previous results except states
+    Array.from(resultsContainer.children).forEach(child => {
+      if (child.id !== 'search-empty' && child.id !== 'search-loading') {
+        child.remove();
+      }
+    });
+    
+    if (!query.trim()) {
+      emptyState.style.display = 'flex';
+      return;
+    }
+    
+    emptyState.style.display = 'none';
+    const q = query.toLowerCase();
+    
+    const results = searchIndex.filter((article: any) => 
+      article.title.toLowerCase().includes(q) || 
+      article.category.toLowerCase().includes(q)
+    ).slice(0, 20); // Limit to 20
+    
+    if (results.length === 0) {
+      resultsContainer.insertAdjacentHTML('beforeend', `
+        <div class="flex items-center justify-center h-full text-gray-400 p-8 text-center">
+          <p>No results found for "${query}"</p>
+        </div>
+      `);
+    } else {
+      const resultsHtml = results.map(renderResult).join('');
+      resultsContainer.insertAdjacentHTML('beforeend', `<div class="flex flex-col space-y-1">${resultsHtml}</div>`);
+    }
+  };
+
+  if (input) {
+    let debounceTimer: any;
+    input.addEventListener('input', (e) => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        performSearch((e.target as HTMLInputElement).value);
+      }, 200);
+    });
+  }
+</script>
