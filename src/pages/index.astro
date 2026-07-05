@@ -54,5 +54,34 @@ const gridArticles = articles.length > 1 ? articles.slice(1) : [];
   </main>
 
   <Footer />
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const navButtons = document.querySelectorAll('.category-nav button');
+      const newsItems = document.querySelectorAll('.news-item');
+
+      navButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Update active styling
+          navButtons.forEach(b => {
+            b.classList.remove('bg-gray-100', 'font-medium', 'text-ink');
+            b.classList.add('text-body', 'hover:bg-gray-100');
+          });
+          btn.classList.add('bg-gray-100', 'font-medium', 'text-ink');
+          btn.classList.remove('text-body', 'hover:bg-gray-100');
+
+          // Filter items
+          const category = btn.getAttribute('data-category');
+          newsItems.forEach((item: HTMLElement) => {
+            if (category === 'all' || item.getAttribute('data-category') === category) {
+              item.style.display = '';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+  </script>
 </body>
 </html>
