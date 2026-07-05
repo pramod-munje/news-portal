@@ -1,6 +1,9 @@
 import Parser from 'rss-parser';
 import * as crypto from 'crypto';
 
+// Bypass SSL verification issues for local development feeds
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 export interface Article {
   title: string;
   link: string;
@@ -28,7 +31,13 @@ const FEEDS = [
 
 const parser = new Parser({
   customFields: {
-    item: ['media:content', 'enclosure', 'content:encoded', 'description']
+    item: [
+      ['media:thumbnail', 'mediaThumbnail'],
+      ['media:content', 'mediaContent'],
+      'enclosure',
+      'content:encoded',
+      'description'
+    ]
   }
 });
 
@@ -52,8 +61,8 @@ function cleanAndUpgradeUrl(url: string | null): string | null {
 }
 
 function extractImage(item: any): string | null {
-  // 1. Check media:content / enclosure
-  for (const field of ['media:content', 'enclosure']) {
+  // 1. Check mediaThumbnail, mediaContent, enclosure
+  for (const field of ['mediaThumbnail', 'mediaContent', 'enclosure']) {
     if (item[field] && item[field].$) {
       const url = item[field].$.url;
       if (url && !isTracker(url)) return cleanAndUpgradeUrl(url);
