@@ -33,4 +33,28 @@
     color: var(--color-ink);
     font-family: var(--font-sans);
   }
+
+  .dark {
+    /* Custom theme vars */
+    --color-primary: #ffffff;
+    --color-on-primary: #171717;
+    --color-ink: #ededed;
+    --color-body: #a1a1a1;
+    --color-mute: #888888;
+    --color-hairline: #333333;
+    --color-hairline-strong: #444444;
+    --color-canvas: #0a0a0a;
+    --color-canvas-soft: #000000;
+    --color-canvas-soft-2: #111111;
+    
+    /* Standard Tailwind color overrides for the UI components */
+    --color-white: #0a0a0a;
+    --color-black: #ffffff;
+    --color-gray-50: #111111;
+    --color-gray-100: #1a1a1a;
+    --color-gray-200: #333333;
+    --color-gray-500: #888888;
+    --color-gray-600: #a1a1a1;
+    --color-gray-900: #ededed;
+  }
 }

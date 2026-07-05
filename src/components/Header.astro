@@ -1,30 +1,32 @@
 ---
-// src/components/Header.astro
+const pathname = Astro.url.pathname;
 ---
 <header class="sticky top-0 z-50 bg-white border-b border-gray-200 h-16 flex items-center justify-between px-6">
   <div class="flex items-center gap-6">
     <a href="/" class="flex items-center gap-2 text-ink no-underline focus-visible:ring-2 focus-visible:ring-black outline-none rounded-sm">
-      <svg height="26" viewBox="0 0 75 65" fill="#171717"><path d="M37.59.25l36.95 64H.64l36.95-64z"></path></svg>
+      <img src="/favicon.svg" alt="Chronicle Logo" class="h-6 w-6 dark:invert" onerror="this.style.display='none'" />
       <span class="font-sans font-semibold text-lg tracking-tight">Chronicle</span>
     </a>
 
     <nav class="hidden md:flex items-center gap-1 category-nav" aria-label="Main navigation">
-      <button data-category="all" class="text-sm font-medium text-ink bg-gray-100 px-3 py-1.5 rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-black outline-none active-filter">All News</button>
-      <button data-category="technology" class="text-sm text-body hover:bg-gray-100 px-3 py-1.5 rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-black outline-none">Tech</button>
-      <button data-category="science" class="text-sm text-body hover:bg-gray-100 px-3 py-1.5 rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-black outline-none">Science</button>
-      <button data-category="space" class="text-sm text-body hover:bg-gray-100 px-3 py-1.5 rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-black outline-none">Space</button>
-      <button data-category="business" class="text-sm text-body hover:bg-gray-100 px-3 py-1.5 rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-black outline-none">Business</button>
+      <a href="/" class:list={["text-sm px-3 py-1.5 rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-black outline-none", pathname === "/" ? "font-medium text-ink bg-gray-100" : "text-body hover:bg-gray-100"]}>All News</a>
+      <a href="/category/technology" class:list={["text-sm px-3 py-1.5 rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-black outline-none", pathname.includes("/technology") ? "font-medium text-ink bg-gray-100" : "text-body hover:bg-gray-100"]}>Tech</a>
+      <a href="/category/science" class:list={["text-sm px-3 py-1.5 rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-black outline-none", pathname.includes("/science") ? "font-medium text-ink bg-gray-100" : "text-body hover:bg-gray-100"]}>Science</a>
+      <a href="/category/space" class:list={["text-sm px-3 py-1.5 rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-black outline-none", pathname.includes("/space") ? "font-medium text-ink bg-gray-100" : "text-body hover:bg-gray-100"]}>Space</a>
+      <a href="/category/business" class:list={["text-sm px-3 py-1.5 rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-black outline-none", pathname.includes("/business") ? "font-medium text-ink bg-gray-100" : "text-body hover:bg-gray-100"]}>Business</a>
     </nav>
   </div>
 
   <div class="flex items-center gap-3">
+    <button id="theme-toggle" aria-label="Toggle dark mode" class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 text-ink hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-black outline-none">
+      <svg id="theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </button>
     <button aria-label="Search articles" class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 text-ink hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-black outline-none">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
     </button>
-    
     <div class="hidden sm:flex items-center gap-2">
       <a href="#" class="text-sm font-medium px-3 h-7 flex items-center rounded bg-white text-ink border border-gray-200 hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-black outline-none">Log In</a>
-      <a href="#" class="text-sm font-medium px-3 h-7 flex items-center rounded bg-[#171717] text-white hover:bg-black focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 outline-none">Sign Up</a>
+      <a href="#" class="text-sm font-medium px-3 h-7 flex items-center rounded bg-black text-white hover:bg-gray-900 focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 outline-none">Sign Up</a>
     </div>
   </div>
 </header>

@@ -27,6 +27,7 @@ const categoryLabel = article.category.replace(/-/g, ' ');
       src={article.image || article.fallbackImage} 
       alt={article.title}
       loading={featured ? "eager" : "lazy"}
+      referrerpolicy="no-referrer"
       width="800"
       height="450"
       class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
