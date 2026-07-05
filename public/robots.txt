@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://latestnews.com/sitemap-index.xml

@@ -122,7 +122,7 @@ function cleanText(html: string): string {
              .substring(0, 200) + '…'; // Added ... equivalent for truncation
 }
 
-export async function fetchNews(): Promise<Article[]> {
+export async function fetchNews(curateForHome: boolean = false): Promise<Article[]> {
   const articles: Article[] = [];
 
   for (const feed of FEEDS) {
@@ -156,7 +156,7 @@ export async function fetchNews(): Promise<Article[]> {
   // Deduplicate by URL and Title
   const seenUrls = new Set<string>();
   const seenTitles = new Set<string>();
-  const uniqueArticles: Article[] = [];
+  let uniqueArticles: Article[] = [];
 
   for (const article of articles.sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime())) {
     const titleHash = crypto.createHash('md5').update(article.title.toLowerCase()).digest('hex');
@@ -167,5 +167,67 @@ export async function fetchNews(): Promise<Article[]> {
     }
   }
 
-  return uniqueArticles;
+  if (!curateForHome) {
+    return uniqueArticles;
+  }
+
+  // Home Page Curation Logic (70% AI/Best w/ image, 20% No image, 10% Politics/World)
+  const totalTarget = 50;
+  const politicsTarget = Math.floor(totalTarget * 0.10); // 5
+  const noImageTarget = Math.floor(totalTarget * 0.20);  // 10
+  const bestImageTarget = totalTarget - politicsTarget - noImageTarget; // 35
+
+  const bucketPolitics: Article[] = [];
+  const bucketNoImage: Article[] = [];
+  const bucketBestImage: Article[] = [];
+  const remaining: Article[] = [];
+
+  for (const article of uniqueArticles) {
+    const searchString = (article.title + " " + article.description).toLowerCase();
+    const isPolitics = article.category === 'world' || /trump|modi|war|politics|election/.test(searchString);
+    const hasImage = !!article.image;
+    const isBest = ['technology', 'startups', 'science', 'space'].includes(article.category) || /ai|artificial intelligence/.test(searchString);
+
+    if (isPolitics && bucketPolitics.length < politicsTarget) {
+      bucketPolitics.push(article);
+    } else if (!hasImage && bucketNoImage.length < noImageTarget) {
+      bucketNoImage.push(article);
+    } else if (hasImage && isBest && bucketBestImage.length < bestImageTarget) {
+      bucketBestImage.push(article);
+    } else {
+      remaining.push(article);
+    }
+  }
+
+  // If buckets aren't full, fill from remaining
+  while (bucketPolitics.length < politicsTarget && remaining.length > 0) {
+    bucketPolitics.push(remaining.shift()!);
+  }
+  while (bucketNoImage.length < noImageTarget && remaining.length > 0) {
+    // Only pull articles without images if possible, otherwise just fill it
+    const noImgIdx = remaining.findIndex(a => !a.image);
+    if (noImgIdx >= 0) {
+      bucketNoImage.push(remaining.splice(noImgIdx, 1)[0]);
+    } else {
+      bucketNoImage.push(remaining.shift()!);
+    }
+  }
+  while (bucketBestImage.length < bestImageTarget && remaining.length > 0) {
+    const imgIdx = remaining.findIndex(a => !!a.image);
+    if (imgIdx >= 0) {
+      bucketBestImage.push(remaining.splice(imgIdx, 1)[0]);
+    } else {
+      bucketBestImage.push(remaining.shift()!);
+    }
+  }
+
+  const finalFeed = [...bucketPolitics, ...bucketNoImage, ...bucketBestImage];
+  
+  // Randomly shuffle the feed so categories and image-types are mixed
+  for (let i = finalFeed.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [finalFeed[i], finalFeed[j]] = [finalFeed[j], finalFeed[i]];
+  }
+
+  return finalFeed;
 }

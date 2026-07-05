@@ -6,7 +6,7 @@ import NewsCard from '../components/NewsCard.astro';
 import Footer from '../components/Footer.astro';
 import { fetchNews } from '../lib/news';
 
-const articles = await fetchNews();
+const articles = await fetchNews(true);
 const featuredArticle = articles.length > 0 ? articles[0] : null;
 const gridArticles = articles.length > 1 ? articles.slice(1) : [];
 ---
@@ -16,9 +16,10 @@ const gridArticles = articles.length > 1 ? articles.slice(1) : [];
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chronicle AI | Premium Autonomous News Portal</title>
+  <title>Latest News | Premium Autonomous News Portal</title>
   
-  <meta name="description" content="Chronicle AI is an autonomous, AI-powered real-time news portal aggregating global updates from trusted sources including BBC, TechCrunch, Wired, NASA and Nature.">
+  <meta name="description" content="Latest News is an autonomous, AI-powered real-time news portal aggregating global updates from trusted sources including BBC, TechCrunch, Wired, NASA and Nature.">
+  <meta name="keywords" content="news, today news, best news, news today, trump news, google news, breaking news, bbc news, world news, latest news, trump news today, ai news, latest ai news, ai news today, ai news anchor, ai news india, anthropic ai news, open ai news, claude ai news, science news, science news today, latest science news, today's science news, science news for students, science news in hindi, python data science news, business news, business news today, space news today, space news, nasa">
   <link rel="icon" type="image/png" href="/favicon-96x96.png?v=2" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2" />
@@ -44,6 +45,23 @@ const gridArticles = articles.length > 1 ? articles.slice(1) : [];
     }
   </script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5643628392894798" crossorigin="anonymous"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "what's the latest news", "acceptedAnswer": { "@type": "Answer", "text": "Latest News aggregates the latest breaking news globally from top verified sources in real-time." } },
+      { "@type": "Question", "name": "what's the latest news about space", "acceptedAnswer": { "@type": "Answer", "text": "For the most recent space exploration updates and NASA missions, visit our Space category." } },
+      { "@type": "Question", "name": "what's the latest news about tech", "acceptedAnswer": { "@type": "Answer", "text": "We aggregate the latest technology updates from industry leaders like TechCrunch and Wired." } },
+      { "@type": "Question", "name": "what's the latest news about business", "acceptedAnswer": { "@type": "Answer", "text": "Our Business category tracks the latest market movements, startup funding, and corporate announcements." } },
+      { "@type": "Question", "name": "what's the latest news about science", "acceptedAnswer": { "@type": "Answer", "text": "Stay updated with the latest scientific discoveries and research breakthroughs from Nature and other top journals." } },
+      { "@type": "Question", "name": "what's the latest news about ai", "acceptedAnswer": { "@type": "Answer", "text": "Latest News provides dedicated, real-time coverage on Artificial Intelligence, including updates on OpenAI, Anthropic, and machine learning." } },
+      { "@type": "Question", "name": "Which is the best website for news?", "acceptedAnswer": { "@type": "Answer", "text": "Latest News is a premium, autonomous news aggregator designed to cut through the noise and deliver high-signal news from multiple top-tier publishers." } },
+      { "@type": "Question", "name": "What is the most popular news website?", "acceptedAnswer": { "@type": "Answer", "text": "While there are many popular legacy media outlets, Latest News is rapidly growing as a top destination for curated, ad-free, autonomous news aggregation." } },
+      { "@type": "Question", "name": "Which is the best free news website?", "acceptedAnswer": { "@type": "Answer", "text": "Latest News is completely free to use, offering premium real-time news aggregation without paywalls." } }
+    ]
+  }
+  </script>
 </head>
 <body class="antialiased min-h-screen flex flex-col">
   <Header />
@@ -71,6 +89,149 @@ const gridArticles = articles.length > 1 ? articles.slice(1) : [];
           ))}
         </div>
       )}
+    </section>
+
+    <!-- FAQ Section for SEO -->
+    <section class="max-w-4xl mx-auto px-6 py-24 border-t border-gray-200">
+      <div class="mb-12 text-center">
+        <h2 class="text-3xl font-semibold tracking-tight text-ink mb-4">Frequently Asked Questions</h2>
+        <p class="text-body text-lg">Your guide to autonomous news aggregation.</p>
+      </div>
+      
+      <div class="space-y-6">
+        <details class="group bg-white dark:bg-gray-800 rounded-lg border border-gray-200 p-6 [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between cursor-pointer font-medium text-ink">
+            what's the latest news
+            <span class="transition group-open:rotate-180">
+              <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+            </span>
+          </summary>
+          <p class="text-body mt-4 leading-relaxed">Latest News aggregates the latest breaking news globally from top verified sources in real-time.</p>
+        </details>
+
+        <details class="group bg-white dark:bg-gray-800 rounded-lg border border-gray-200 p-6 [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between cursor-pointer font-medium text-ink">
+            what's the latest news about space
+            <span class="transition group-open:rotate-180">
+              <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+            </span>
+          </summary>
+          <p class="text-body mt-4 leading-relaxed">For the most recent space exploration updates and NASA missions, visit our Space category.</p>
+        </details>
+
+        <details class="group bg-white dark:bg-gray-800 rounded-lg border border-gray-200 p-6 [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between cursor-pointer font-medium text-ink">
+            what's the latest news about tech
+            <span class="transition group-open:rotate-180">
+              <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+            </span>
+          </summary>
+          <p class="text-body mt-4 leading-relaxed">We aggregate the latest technology updates from industry leaders like TechCrunch and Wired.</p>
+        </details>
+
+        <details class="group bg-white dark:bg-gray-800 rounded-lg border border-gray-200 p-6 [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between cursor-pointer font-medium text-ink">
+            what's the latest news about business
+            <span class="transition group-open:rotate-180">
+              <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+            </span>
+          </summary>
+          <p class="text-body mt-4 leading-relaxed">Our Business category tracks the latest market movements, startup funding, and corporate announcements.</p>
+        </details>
+
+        <details class="group bg-white dark:bg-gray-800 rounded-lg border border-gray-200 p-6 [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between cursor-pointer font-medium text-ink">
+            what's the latest news about science
+            <span class="transition group-open:rotate-180">
+              <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+            </span>
+          </summary>
+          <p class="text-body mt-4 leading-relaxed">Stay updated with the latest scientific discoveries and research breakthroughs from Nature and other top journals.</p>
+        </details>
+
+        <details class="group bg-white dark:bg-gray-800 rounded-lg border border-gray-200 p-6 [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between cursor-pointer font-medium text-ink">
+            what's the latest news about ai
+            <span class="transition group-open:rotate-180">
+              <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+            </span>
+          </summary>
+          <p class="text-body mt-4 leading-relaxed">Latest News provides dedicated, real-time coverage on Artificial Intelligence, including updates on OpenAI, Anthropic, and machine learning.</p>
+        </details>
+
+        <details class="group bg-white dark:bg-gray-800 rounded-lg border border-gray-200 p-6 [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between cursor-pointer font-medium text-ink">
+            Which is the best website for news?
+            <span class="transition group-open:rotate-180">
+              <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+            </span>
+          </summary>
+          <p class="text-body mt-4 leading-relaxed">Latest News is a premium, autonomous news aggregator designed to cut through the noise and deliver high-signal news from multiple top-tier publishers.</p>
+        </details>
+
+        <details class="group bg-white dark:bg-gray-800 rounded-lg border border-gray-200 p-6 [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between cursor-pointer font-medium text-ink">
+            What is the most popular news website?
+            <span class="transition group-open:rotate-180">
+              <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+            </span>
+          </summary>
+          <p class="text-body mt-4 leading-relaxed">While there are many popular legacy media outlets, Latest News is rapidly growing as a top destination for curated, ad-free, autonomous news aggregation.</p>
+        </details>
+
+        <details class="group bg-white dark:bg-gray-800 rounded-lg border border-gray-200 p-6 [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between cursor-pointer font-medium text-ink">
+            Which is the best free news website?
+            <span class="transition group-open:rotate-180">
+              <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+            </span>
+          </summary>
+          <p class="text-body mt-4 leading-relaxed">Latest News is completely free to use, offering premium real-time news aggregation without paywalls.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- SEO Article (600 words) -->
+    <section class="max-w-4xl mx-auto px-6 py-24 border-t border-gray-200 prose prose-gray dark:prose-invert prose-lg">
+      <h2 class="text-3xl font-semibold tracking-tight text-ink mb-6">The Future of Information: Why Autonomous News Aggregation is Essential</h2>
+      
+      <p>
+        In today's hyper-connected digital landscape, keeping up with the <strong>latest news</strong> can often feel like drinking from a firehose. With millions of articles published daily across thousands of platforms, finding high-quality, reliable information has become increasingly difficult. This is where the power of <em>autonomous news aggregation</em> comes into play, fundamentally transforming how we consume daily updates, from breaking global headlines to niche industry reports.
+      </p>
+
+      <h3 class="text-2xl font-medium text-ink mt-8 mb-4">Filtering the Noise from the Signal</h3>
+      <p>
+        Traditional media consumption requires readers to manually visit dozens of different websites, navigate through obtrusive paywalls, dodge intrusive advertisements, and attempt to mentally stitch together the full story. This manual process is not only time-consuming but often leads to information fatigue. A premium news aggregator solves this by automatically curating the most important stories from verified, top-tier publishers in real-time. Whether you are searching for the <strong>latest news about AI</strong>, tracking financial markets, or exploring recent space missions, an autonomous system filters out clickbait and presents only the highest-signal content.
+      </p>
+
+      <p>
+        By leveraging advanced parsing algorithms, <strong>Latest News</strong> continuously scans global RSS feeds—including authoritative sources like the BBC, TechCrunch, Wired, NASA, and Nature. The system intelligently categorizes these feeds, removes duplicate reporting, and displays a unified, streamlined dashboard of the most recent intelligence.
+      </p>
+
+      <h3 class="text-2xl font-medium text-ink mt-8 mb-4">The Importance of Real-Time Data</h3>
+      <p>
+        In sectors like technology, business, and artificial intelligence, information moves at breakneck speed. A delay of just a few hours can mean missing out on a critical market shift or a groundbreaking scientific discovery. For professionals and enthusiasts alike, having instant access to the <strong>latest news about business</strong> and tech is no longer a luxury; it is a necessity. Autonomous news curation ensures that the moment a major story breaks globally, it is immediately indexed, categorized, and delivered to your screen without human editorial delays.
+      </p>
+
+      <h3 class="text-2xl font-medium text-ink mt-8 mb-4">Why Choose an Autonomous Aggregator?</h3>
+      <p>
+        When people ask, <em>"Which is the best website for news?"</em>, the answer is rapidly shifting away from legacy single-publisher websites and toward intelligent aggregators. Here are the core benefits of using a platform like Latest News:
+      </p>
+      <ul class="list-disc pl-6 space-y-2 mb-6">
+        <li><strong>Comprehensive Coverage:</strong> Instead of relying on a single editorial perspective, you gain a holistic view of global events by reading aggregated reports from multiple trusted sources.</li>
+        <li><strong>Zero Clutter:</strong> Experience lightning-fast load times with a clean, ad-free interface that respects your time and attention span.</li>
+        <li><strong>Niche Categorization:</strong> Easily dive into specialized feeds. From the <em>latest news about space</em> to deep dives into data science and AI, categorized feeds ensure you only see what matters to you.</li>
+        <li><strong>No Paywalls:</strong> Access premium, real-time intelligence completely free of charge, democratizing access to high-quality information.</li>
+      </ul>
+
+      <h3 class="text-2xl font-medium text-ink mt-8 mb-4">The Role of Artificial Intelligence in News</h3>
+      <p>
+        As we look toward the future, the integration of AI into news aggregation will only deepen. We are already seeing the emergence of AI news anchors, automated summarization, and predictive trend analysis. Keeping a pulse on the <strong>latest news about AI</strong> itself is crucial, as companies like OpenAI and Anthropic rapidly reshape the digital landscape. An autonomous portal doesn't just report on these changes; it utilizes the underlying principles of automation and machine learning to build a better reading experience.
+      </p>
+
+      <p>
+        Ultimately, the goal of <strong>Latest News</strong> is simple: to save you time while making you smarter. By removing the friction of traditional news browsing and delivering a beautifully designed, high-performance feed of global intelligence, we empower you to read the signal, ignore the noise, and stay updated automatically.
+      </p>
     </section>
   </main>
 

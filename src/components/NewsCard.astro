@@ -22,27 +22,34 @@ const categoryLabel = article.category.replace(/-/g, ' ');
   "news-item group relative flex flex-col bg-white rounded-lg shadow-[0_1px_1px_rgba(0,0,0,0.02),_0_2px_2px_rgba(0,0,0,0.04)] ring-1 ring-gray-200 overflow-hidden hover:shadow-[0_2px_2px_rgba(0,0,0,0.04),_0_8px_8px_-8px_rgba(0,0,0,0.04)] transition-shadow",
   featured ? "md:flex-row md:col-span-full" : ""
 ]}>
-  <div class:list={["relative overflow-hidden bg-gray-100", featured ? "md:w-1/2" : "w-full aspect-video"]}>
-    <img 
-      src={article.image || article.fallbackImage} 
-      alt={article.title}
-      loading={featured ? "eager" : "lazy"}
-      referrerpolicy="no-referrer"
-      width="800"
-      height="450"
-      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-      onerror={`this.onerror=null; this.src='${article.fallbackImage}';`}
-    />
-    <div class="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-white/90 backdrop-blur text-[10px] font-mono text-ink font-medium tracking-wide uppercase shadow-sm">
-      {categoryLabel}
+  {article.image && (
+    <div class:list={["relative overflow-hidden bg-gray-100 border-b border-gray-100 dark:border-gray-800", featured ? "md:w-1/2 md:border-b-0 md:border-r" : "w-full aspect-video"]}>
+      <img 
+        src={article.image} 
+        alt={article.title}
+        loading={featured ? "eager" : "lazy"}
+        referrerpolicy="no-referrer"
+        width="800"
+        height="450"
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+      />
+      <div class="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-white/90 backdrop-blur text-[10px] font-mono text-ink font-medium tracking-wide uppercase shadow-sm">
+        {categoryLabel}
+      </div>
     </div>
-  </div>
+  )}
 
   <div class:list={["flex flex-col p-6 min-w-0 flex-1", featured ? "md:w-1/2 md:justify-center md:p-10" : ""]}>
-    <div class="flex items-center gap-2 text-xs font-mono text-mute mb-3">
+    <div class="flex flex-wrap items-center gap-2 text-xs font-mono text-mute mb-3">
       <span class="font-medium text-body">{article.source}</span>
       <span>•</span>
       <time datetime={article.pubDate.toISOString()}>{dateDisplay}</time>
+      {!article.image && (
+        <>
+          <span>•</span>
+          <span class="uppercase px-1.5 py-0.5 rounded-sm bg-gray-100 dark:bg-gray-800 text-body font-medium">{categoryLabel}</span>
+        </>
+      )}
     </div>
     
     <a href={article.link} target="_blank" rel="noopener noreferrer" class="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-sm mb-2 block">
