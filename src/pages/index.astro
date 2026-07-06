@@ -92,11 +92,13 @@ const gridArticles = articles.length > 1 ? articles.slice(1) : [];
           <p class="text-body font-mono text-sm">Waiting for signal… (No articles fetched)</p>
         </div>
       ) : (
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="flex flex-col">
           {featuredArticle && <NewsCard article={featuredArticle} featured={true} />}
-          {gridArticles.map((article) => (
-            <NewsCard article={article} />
-          ))}
+          <div class="columns-1 md:columns-2 lg:columns-3 gap-6">
+            {gridArticles.map((article) => (
+              <NewsCard article={article} />
+            ))}
+          </div>
         </div>
       )}
     </section>

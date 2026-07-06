@@ -19,8 +19,8 @@ const categoryLabel = article.category.replace(/-/g, ' ');
 <article 
   data-category={article.category}
   class:list={[
-  "news-item group relative flex flex-col bg-white rounded-lg shadow-[0_1px_1px_rgba(0,0,0,0.02),_0_2px_2px_rgba(0,0,0,0.04)] ring-1 ring-gray-200 overflow-hidden hover:shadow-[0_2px_2px_rgba(0,0,0,0.04),_0_8px_8px_-8px_rgba(0,0,0,0.04)] transition-shadow",
-  featured ? "md:flex-row md:col-span-full" : ""
+  "news-item group relative flex flex-col bg-white dark:bg-gray-900 rounded-lg shadow-[0_1px_1px_rgba(0,0,0,0.02),_0_2px_2px_rgba(0,0,0,0.04)] ring-1 ring-gray-200 dark:ring-gray-800 overflow-hidden hover:shadow-[0_2px_2px_rgba(0,0,0,0.04),_0_8px_8px_-8px_rgba(0,0,0,0.04)] transition-shadow break-inside-avoid h-fit",
+  featured ? "md:flex-row mb-6" : "mb-6"
 ]}>
   {article.image && (
     <div class:list={["relative overflow-hidden bg-gray-100 border-b border-gray-100 dark:border-gray-800", featured ? "md:w-1/2 md:border-b-0 md:border-r" : "w-full aspect-video"]}>
@@ -61,11 +61,11 @@ const categoryLabel = article.category.replace(/-/g, ' ');
       </h3>
     </a>
     
-    <p class="text-body text-sm line-clamp-3 mb-6 flex-1">
+    <p class="text-body text-sm line-clamp-3 mb-6">
       {article.description}
     </p>
     
-    <div class="mt-auto">
+    <div>
       <a href={article.link} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-medium text-ink hover:text-blue-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-sm">
         Read Full Article
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
