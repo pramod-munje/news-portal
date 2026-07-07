@@ -16,11 +16,7 @@ const { article } = Astro.props;
   <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
     {article ? (
       <>
-        <div class="mb-8 flex items-center justify-center">
-          <span class="px-3 py-1 text-xs font-bold uppercase tracking-wider text-white bg-red-600 rounded-full shadow-sm animate-pulse">
-            Breaking News
-          </span>
-        </div>
+
         
         <h1 class="text-3xl md:text-4xl lg:text-5xl font-semibold text-black leading-relaxed md:leading-relaxed lg:leading-relaxed tracking-tight text-balance mb-6 hover:text-blue-600 transition-colors">
           <a href={article.link} target="_blank" rel="noopener noreferrer">{article.title}</a>
