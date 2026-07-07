@@ -22,28 +22,28 @@ const { article } = Astro.props;
           </span>
         </div>
         
-        <h1 class="text-3xl md:text-4xl lg:text-5xl font-semibold text-black dark:text-white leading-relaxed md:leading-relaxed lg:leading-relaxed tracking-tight text-balance mb-6 hover:text-blue-600 transition-colors">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-semibold text-black leading-relaxed md:leading-relaxed lg:leading-relaxed tracking-tight text-balance mb-6 hover:text-blue-600 transition-colors">
           <a href={article.link} target="_blank" rel="noopener noreferrer">{article.title}</a>
         </h1>
 
-        <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-3xl leading-relaxed text-balance line-clamp-3">
+        <p class="text-lg md:text-xl text-gray-600 mb-10 max-w-3xl leading-relaxed text-balance line-clamp-3">
           {article.description}
         </p>
         
         <div class="flex flex-wrap items-center justify-center gap-4">
-          <a href={article.link} target="_blank" rel="noopener noreferrer" class="h-12 px-8 rounded-full bg-black dark:bg-white text-white dark:text-black font-medium flex items-center hover:bg-gray-900 dark:hover:bg-gray-100 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 outline-none text-base shadow-lg">
+          <a href={article.link} target="_blank" rel="noopener noreferrer" class="h-12 px-8 rounded-full bg-black text-white font-medium flex items-center hover:bg-gray-900 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 outline-none text-base shadow-lg">
             Read Full Story
           </a>
         </div>
       </>
     ) : (
       <>
-        <p class="text-xl md:text-2xl font-medium text-gray-500 dark:text-gray-400 mb-8 tracking-tight">
+        <p class="text-xl md:text-2xl font-medium text-gray-500 mb-8 tracking-tight">
           One platform, infinite intelligence, zero noise.
         </p>
         
-        <h1 class="text-3xl md:text-4xl lg:text-5xl font-medium text-gray-400 dark:text-gray-500 leading-relaxed md:leading-relaxed lg:leading-relaxed tracking-tight text-balance mb-12">
-          Latest News aggregates <span class="text-black dark:text-white font-semibold">top-tier sources</span>, deploys <span class="text-black dark:text-white font-semibold">autonomous agents</span> to filter out the noise, and <span class="text-black dark:text-white font-semibold">curates a clean feed</span> to keep you updated — all in real-time.
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-medium text-gray-400 leading-relaxed md:leading-relaxed lg:leading-relaxed tracking-tight text-balance mb-12">
+          Latest News aggregates <span class="text-black font-semibold">top-tier sources</span>, deploys <span class="text-black font-semibold">autonomous agents</span> to filter out the noise, and <span class="text-black font-semibold">curates a clean feed</span> to keep you updated — all in real-time.
         </h1>
 
         <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-10 text-sm font-medium">

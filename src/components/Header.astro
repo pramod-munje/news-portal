@@ -2,7 +2,7 @@
 const pathname = Astro.url.pathname;
 import SearchModal from './SearchModal.astro';
 ---
-<header class="sticky top-0 z-50 bg-white dark:bg-canvas-soft border-b border-gray-200 dark:border-gray-800 h-16 flex items-center justify-between px-6">
+<header class="sticky top-0 z-50 bg-white border-b border-gray-200 h-16 flex items-center justify-between px-6">
   <div class="flex items-center gap-6">
     <a href="/" class="flex items-center gap-2 text-ink no-underline focus-visible:ring-2 focus-visible:ring-black outline-none rounded-sm">
       <img src="/favicon.svg" alt="Latest News Logo" class="h-6 w-6 dark:invert" onerror="this.style.display='none'" />
@@ -13,7 +13,7 @@ import SearchModal from './SearchModal.astro';
   <div class="flex items-center gap-3">
     <!-- Custom Language Selector -->
     <div class="relative hidden sm:flex items-center">
-      <select id="custom-language-selector" class="appearance-none bg-white dark:bg-canvas-soft border border-gray-200 dark:border-gray-700 text-ink text-sm font-medium h-8 pl-3 pr-7 rounded-full focus-visible:ring-2 focus-visible:ring-black outline-none cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+      <select id="custom-language-selector" class="appearance-none bg-white border border-gray-200 text-ink text-sm font-medium h-8 pl-3 pr-7 rounded-full focus-visible:ring-2 focus-visible:ring-black outline-none cursor-pointer hover:bg-gray-50 transition-colors">
         <option value="en">EN</option>
         <option value="es">ES</option>
         <option value="fr">FR</option>
@@ -29,16 +29,16 @@ import SearchModal from './SearchModal.astro';
     <!-- Hidden Google Translate Element -->
     <div id="google_translate_element" style="display:none;"></div>
     
-    <button id="theme-toggle" aria-label="Toggle dark mode" class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 dark:border-gray-700 text-ink hover:bg-gray-50 dark:hover:bg-gray-800 focus-visible:ring-2 focus-visible:ring-black outline-none transition-colors">
+    <button id="theme-toggle" aria-label="Toggle dark mode" class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 text-ink hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-black outline-none transition-colors">
       <svg id="theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
     </button>
-    <button id="search-toggle" aria-label="Search articles" class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 dark:border-gray-700 text-ink hover:bg-gray-50 dark:hover:bg-gray-800 focus-visible:ring-2 focus-visible:ring-black outline-none transition-colors">
+    <button id="search-toggle" aria-label="Search articles" class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 text-ink hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-black outline-none transition-colors">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
     </button>
     <div class="hidden sm:flex items-center gap-2">
-      <a href="/faq" class="text-sm font-medium px-3 h-7 flex items-center rounded bg-white dark:bg-gray-800 text-ink border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 focus-visible:ring-2 focus-visible:ring-black outline-none transition-colors">FAQ</a>
-      <a href="/about" class="text-sm font-medium px-3 h-7 flex items-center rounded bg-white dark:bg-gray-800 text-ink border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 focus-visible:ring-2 focus-visible:ring-black outline-none transition-colors">About Me</a>
-      <a href="/contact" class="text-sm font-medium px-3 h-7 flex items-center rounded bg-black dark:bg-white text-white dark:text-black hover:bg-gray-900 dark:hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 outline-none transition-colors">Contact Us</a>
+      <a href="/faq" class="text-sm font-medium px-3 h-7 flex items-center rounded bg-white text-ink border border-gray-200 hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-black outline-none transition-colors">FAQ</a>
+      <a href="/about" class="text-sm font-medium px-3 h-7 flex items-center rounded bg-white text-ink border border-gray-200 hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-black outline-none transition-colors">About Me</a>
+      <a href="/contact" class="text-sm font-medium px-3 h-7 flex items-center rounded bg-black text-white hover:bg-gray-900 focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 outline-none transition-colors">Contact Us</a>
     </div>
   </div>
 </header>

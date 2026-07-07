@@ -19,11 +19,11 @@ const categoryLabel = article.category.replace(/-/g, ' ');
 <article 
   data-category={article.category}
   class:list={[
-  "news-item group relative flex flex-col bg-white dark:bg-gray-900 rounded-lg shadow-[0_1px_1px_rgba(0,0,0,0.02),_0_2px_2px_rgba(0,0,0,0.04)] ring-1 ring-gray-200 dark:ring-gray-800 overflow-hidden hover:shadow-[0_2px_2px_rgba(0,0,0,0.04),_0_8px_8px_-8px_rgba(0,0,0,0.04)] transition-shadow break-inside-avoid h-fit",
+  "news-item group relative flex flex-col bg-white rounded-lg shadow-[0_1px_1px_rgba(0,0,0,0.02),_0_2px_2px_rgba(0,0,0,0.04)] ring-1 ring-gray-200 overflow-hidden hover:shadow-[0_2px_2px_rgba(0,0,0,0.04),_0_8px_8px_-8px_rgba(0,0,0,0.04)] transition-shadow break-inside-avoid h-fit",
   featured ? "md:flex-row mb-6" : "mb-6"
 ]}>
   {article.image && (
-    <div class:list={["relative overflow-hidden bg-gray-100 border-b border-gray-100 dark:border-gray-800", featured ? "md:w-1/2 md:border-b-0 md:border-r" : "w-full aspect-video"]}>
+    <div class:list={["relative overflow-hidden bg-gray-100 border-b border-gray-100", featured ? "md:w-1/2 md:border-b-0 md:border-r" : "w-full aspect-video"]}>
       <img 
         src={article.image} 
         alt={article.title}
